@@ -4,6 +4,9 @@ import { BrowserRouter } from 'react-router-dom';
 import GlobalStyles from '../../styles/global';
 import theme from '../../styles/theme';
 
+import { Container } from './styles';
+
+import Header from '../Header';
 import Routes from '../../routes';
 
 function App() {
@@ -11,7 +14,10 @@ function App() {
     <BrowserRouter>
       <ThemeProvider theme={theme}>
         <GlobalStyles />
-        <Routes />
+        <Container>
+          <Header />
+          <Routes />
+        </Container>
       </ThemeProvider>
     </BrowserRouter>
   );
