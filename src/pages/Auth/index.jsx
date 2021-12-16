@@ -1,6 +1,5 @@
-import {
-  useContext,
-} from 'react';
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { Form, RadioGroupContainer } from './styles';
 
@@ -11,6 +10,7 @@ import { Context } from '../../components/App';
 
 function Auth() {
   const { state, setState } = useContext(Context);
+  const navigate = useNavigate();
 
   function handleUserRoleChange(event) {
     setState({
@@ -28,6 +28,7 @@ function Auth() {
 
   function handleFormSubmit(event) {
     event.preventDefault();
+    navigate('/');
   }
 
   return (

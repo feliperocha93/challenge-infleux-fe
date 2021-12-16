@@ -16,6 +16,7 @@ export const Context = createContext();
 
 const initialValues = {
   userRole: 'advertiser',
+  userId: '',
 };
 
 function App() {
