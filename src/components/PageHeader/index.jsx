@@ -2,6 +2,7 @@ import { useContext } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
+import { AiOutlineLogout } from 'react-icons/ai';
 import { Container } from './styles';
 
 import { Context } from '../App';
@@ -15,12 +16,19 @@ function PageHeader() {
       userRole: 'advertiser',
       userId: '',
     });
-    navigate('/');
+    localStorage.removeItem('user-role');
+    localStorage.removeItem('user-id');
+    navigate('/login');
   }
   return (
     <Container>
       <h2>Welcome, Publisher</h2>
-      <span onClick={logout}>O</span>
+      <AiOutlineLogout
+        onClick={logout}
+        size={24}
+        fill="#FC5050"
+        style={{ cursor: 'pointer' }}
+      />
     </Container>
   );
 }

@@ -14,13 +14,8 @@ import Routes from '../../routes';
 
 export const Context = createContext();
 
-const initialValues = {
-  userRole: 'advertiser',
-  userId: '',
-};
-
 function App() {
-  const [state, setState] = useState({ ...initialValues });
+  const [state, setState] = useState({});
 
   return (
     <BrowserRouter>

@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Form, RadioGroupContainer } from './styles';
@@ -8,26 +8,36 @@ import Input from '../../components/Input';
 
 import { Context } from '../../components/App';
 
+const userRole = localStorage.getItem('user-role') || 'advertiser';
+const userId = localStorage.getItem('user-id') || '';
+
 function Auth() {
   const { state, setState } = useContext(Context);
+  const [user, setUser] = useState({ userRole, userId });
   const navigate = useNavigate();
 
   function handleUserRoleChange(event) {
-    setState({
-      ...state,
+    setUser({
+      ...user,
       userRole: event.target.value,
     });
   }
 
   function handleUserIdChange(event) {
-    setState({
-      ...state,
+    setUser({
+      ...user,
       userId: event.target.value,
     });
   }
 
   function handleFormSubmit(event) {
     event.preventDefault();
+    localStorage.setItem('user-role', user.userRole);
+    localStorage.setItem('user-id', user.userId);
+    setState({
+      ...state,
+      user,
+    });
     navigate('/');
   }
 
@@ -41,7 +51,7 @@ function Auth() {
             name="userRole"
             value="advertiser"
             onChange={handleUserRoleChange}
-            defaultChecked={state.userRole === 'advertiser'}
+            defaultChecked={user.userRole === 'advertiser'}
           />
           Advertiser
         </label>
@@ -53,15 +63,15 @@ function Auth() {
             name="userRole"
             value="publisher"
             onChange={handleUserRoleChange}
-            defaultChecked={state.userRole === 'publisher'}
+            defaultChecked={user.userRole === 'publisher'}
           />
           Publisher
         </label>
       </RadioGroupContainer>
 
-      <Input type="text" placeholder="ID" value={state.userId} onChange={handleUserIdChange} />
+      <Input type="text" placeholder="ID" value={user.userId} onChange={handleUserIdChange} />
 
-      <Button type="submit" disabled={!state.userId}>
+      <Button type="submit" disabled={!user.userId}>
         Login
       </Button>
     </Form>
