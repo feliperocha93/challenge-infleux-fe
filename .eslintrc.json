@@ -30,7 +30,8 @@
     "react-hooks/exhaustive-deps": "warn",
     "class-methods-use-this": "off",
     "react/forbid-prop-types": "off",
-    "camelcase": "off"
+    "camelcase": "off",
+    "import/no-cycle": "off"
   },
   "overrides": [
     {

@@ -1,44 +1,66 @@
-import { useState } from 'react';
+import {
+  useContext,
+} from 'react';
 
 import { Form, RadioGroupContainer } from './styles';
 
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 
+import { Context } from '../../components/App';
+
 function Auth() {
-  const [userRole, setUserRole] = useState('advertiser');
-  const [userId, setUserId] = useState('');
+  const { state, setState } = useContext(Context);
 
   function handleUserRoleChange(event) {
-    setUserRole(event.target.value);
+    setState({
+      ...state,
+      userRole: event.target.value,
+    });
   }
 
   function handleUserIdChange(event) {
-    setUserId(event.target.value);
+    setState({
+      ...state,
+      userId: event.target.value,
+    });
   }
 
   function handleFormSubmit(event) {
     event.preventDefault();
-    console.log({ userRole, userId });
   }
 
   return (
     <Form onSubmit={handleFormSubmit}>
       <RadioGroupContainer>
         <label htmlFor="adv">
-          <input type="radio" id="adv" name="userRole" value="advertiser" onChange={handleUserRoleChange} />
+          <input
+            type="radio"
+            id="adv"
+            name="userRole"
+            value="advertiser"
+            onChange={handleUserRoleChange}
+            defaultChecked={state.userRole === 'advertiser'}
+          />
           Advertiser
         </label>
 
         <label htmlFor="pub">
-          <input type="radio" id="pub" name="userRole" value="publisher" onChange={handleUserRoleChange} />
+          <input
+            type="radio"
+            id="pub"
+            name="userRole"
+            value="publisher"
+            onChange={handleUserRoleChange}
+            defaultChecked={state.userRole === 'publisher'}
+          />
           Publisher
         </label>
       </RadioGroupContainer>
 
-      <Input type="text" placeholder="ID" value={userId} onChange={handleUserIdChange} />
+      <Input type="text" placeholder="ID" value={state.userId} onChange={handleUserIdChange} />
 
-      <Button type="submit" disabled={!userId}>
+      <Button type="submit" disabled={!state.userId}>
         Login
       </Button>
     </Form>
