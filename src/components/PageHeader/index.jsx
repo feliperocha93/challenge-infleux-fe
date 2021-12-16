@@ -1,9 +1,10 @@
-import { Container, Title } from './styles';
+import { Container } from './styles';
 
 function PageHeader() {
   return (
     <Container>
-      <Title>Infleux Challenge 🔥</Title>
+      <h2>Welcome, Publisher</h2>
+      <span>O</span>
     </Container>
   );
 }

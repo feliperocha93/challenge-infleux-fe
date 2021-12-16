@@ -7,12 +7,18 @@ export default createGlobalStyle`
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
   }
+
   body {
     background: ${({ theme }) => theme.colors.background};
     font-size: 16px;
     color: ${({ theme }) => theme.colors.gray[900]}
   }
+
   button {
     cursor: pointer;
+  }
+
+  ul {
+    list-style: none;
   }
 `;
