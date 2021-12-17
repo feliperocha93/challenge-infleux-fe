@@ -7,6 +7,7 @@ import Button from '../../components/Button';
 import { Form, RadioGroupContainer } from './styles';
 
 import { Context } from '../../components/App';
+import AdvertisersService from '../../services/api/AdvertisersService';
 
 function Auth() {
   const { state, setState } = useContext(Context);
@@ -30,15 +31,22 @@ function Auth() {
     });
   }
 
-  function handleFormSubmit(event) {
+  async function handleFormSubmit(event) {
     event.preventDefault();
-    localStorage.setItem('user-role', user.userRole);
-    localStorage.setItem('user-id', user.userId);
-    setState({
-      ...state,
-      user,
-    });
-    navigate('/');
+
+    try {
+      const { name } = await AdvertisersService.login(user.userId);
+      localStorage.setItem('user-role', user.userRole);
+      localStorage.setItem('user-id', user.userId);
+      setState({
+        ...state,
+        user,
+        name,
+      });
+      navigate('/');
+    } catch {
+      alert('Something is wrong. Try again, please.');
+    }
   }
 
   return (

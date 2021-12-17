@@ -22,7 +22,11 @@ function PageHeader() {
   }
   return (
     <Container>
-      <h2>Welcome, NAME</h2>
+      <h2>
+        {state.name}
+        {' '}
+        ☺
+      </h2>
       <AiOutlineLogout
         onClick={logout}
         size={24}

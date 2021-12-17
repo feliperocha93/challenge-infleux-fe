@@ -6,6 +6,12 @@ class AdvertisersService {
     this.campaignsUrl = '/campaigns';
   }
 
+  async login(id) {
+    const { data } = await axiosInstance.get(`${this.advertisersUrl}/${id}`);
+
+    return data;
+  }
+
   async createCampgin(campaign) {
     const { data } = await axiosInstance.post(`${this.campaignsUrl}`, campaign);
 
