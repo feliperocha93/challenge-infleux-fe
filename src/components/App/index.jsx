@@ -19,7 +19,7 @@ function App() {
 
   useEffect(() => {
     async function fetchCountries() {
-      const countries = await CountriesService.getCountries();
+      const countries = await CountriesService.index();
       setState({
         ...state,
         countries,

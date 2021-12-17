@@ -5,7 +5,7 @@ class CountriesService {
     this.countriesUrl = '/countries';
   }
 
-  async getCountries() {
+  async index() {
     const { data } = await axiosInstance.get(this.countriesUrl);
 
     return data;

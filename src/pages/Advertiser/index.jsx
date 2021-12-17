@@ -5,57 +5,70 @@ import CampaignForm from '../../components/CampaignForm';
 import CampaignList from '../../components/CampaignList';
 
 import { Context } from '../../components/App';
+import AdvertisersService from '../../services/api/AdvertisersService';
 
-const myCampaigns = [
-  {
-    name: 'Minha Campanha 1',
-    advertiser_id: '123456789',
-    campaign_type: 'CPM',
-    countries_id: ['123456789', '123456789'],
-    bid: 100.00,
-    publishers: [
-      {
-        publisher_id: '1',
-        publisher_result: 70,
-      },
-      {
-        publisher_id: '1',
-        publisher_result: 70,
-      },
-    ],
-  },
-  {
-    name: 'Minha Campanha 2',
-    advertiser_id: '123456789',
-    campaign_type: 'CPM',
-    countries_id: ['123456789', '123456789'],
-    bid: 100.00,
-    publishers: [
-      {
-        publisher_id: '1',
-        publisher_result: 478,
-      },
-      {
-        publisher_id: '1',
-        publisher_result: 478,
-      },
-    ],
+// const myCampaigns = [
+//   {
+//     name: 'Minha Campanha 1',
+//     advertiser_id: '123456789',
+//     campaign_type: 'CPM',
+//     countries_id: ['123456789', '123456789'],
+//     bid: 100.00,
+//     publishers: [
+//       {
+//         publisher_id: '1',
+//         publisher_result: 70,
+//       },
+//       {
+//         publisher_id: '1',
+//         publisher_result: 70,
+//       },
+//     ],
+//   },
+//   {
+//     name: 'Minha Campanha 2',
+//     advertiser_id: '123456789',
+//     campaign_type: 'CPM',
+//     countries_id: ['123456789', '123456789'],
+//     bid: 100.00,
+//     publishers: [
+//       {
+//         publisher_id: '1',
+//         publisher_result: 478,
+//       },
+//       {
+//         publisher_id: '1',
+//         publisher_result: 478,
+//       },
+//     ],
 
-  },
-];
+//   },
+// ];
 
 const campaignTypeValues = ['CPM', 'CPC', 'CPI'];
 
 function Advertiser() {
   const { state } = useContext(Context);
+
+  const [myCampaigns, setMyCampaigns] = useState([]);
+
   const [newCampaign, setNewCampaign] = useState({
     name: '',
-    advertiser_id: state?.user?.userId,
+    advertiser_id: state.user.userId,
     campaign_type: '',
     countries_id: [],
     bid: '',
   });
   const [formIsValid, setFormIsValid] = useState(false);
+
+  useEffect(() => {
+    async function fetchMyCampaigns() {
+      const response = await AdvertisersService.getMyCampaigns(state.user.userId);
+      console.log({ response });
+      setMyCampaigns(response);
+    }
+    fetchMyCampaigns();
+  }, []);
 
   useEffect(() => {
     if (
