@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
 
-import { ListTitle, ListContent } from './styles';
+import { ListContent } from './styles';
 
 import CampaignCard from '../CampaignCard';
 
 function CampaignList({ label, campaigns }) {
   return (
     <>
-      <ListTitle>{label}</ListTitle>
+      <h2>{label}</h2>
 
       <ListContent>
         {campaigns.map((campaign) => (

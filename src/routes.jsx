@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
+import Advertiser from './pages/Advertiser';
 import Auth from './pages/Auth';
 import Publisher from './pages/Publisher';
 
@@ -8,10 +9,9 @@ import { Context } from './components/App';
 
 export default function Router() {
   const { state } = useContext(Context);
-  const isLoggedIn = state?.user?.userId !== '';
+  const isLoggedIn = state?.user?.userId && state?.user?.userId !== '';
 
-  // TODO: Change Auth to Advertiser when this page is done
-  const Home = state?.user?.userRole === 'publisher' ? <Publisher /> : <Auth />;
+  const Home = state?.user?.userRole === 'publisher' ? <Publisher /> : <Advertiser />;
 
   return (
     <Routes>

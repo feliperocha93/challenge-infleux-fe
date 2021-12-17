@@ -12,17 +12,14 @@ function PageHeader() {
   const navigate = useNavigate();
 
   function logout() {
-    setState({
-      userRole: 'advertiser',
-      userId: '',
-    });
+    setState({});
     localStorage.removeItem('user-role');
     localStorage.removeItem('user-id');
     navigate('/login');
   }
   return (
     <Container>
-      <h2>Welcome, Publisher</h2>
+      <h2>Welcome, NAME</h2>
       <AiOutlineLogout
         onClick={logout}
         size={24}

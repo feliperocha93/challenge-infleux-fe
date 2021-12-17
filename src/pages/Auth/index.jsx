@@ -1,10 +1,10 @@
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Form, RadioGroupContainer } from './styles';
-
-import Button from '../../components/Button';
 import Input from '../../components/Input';
+import Button from '../../components/Button';
+
+import { Form, RadioGroupContainer } from './styles';
 
 import { Context } from '../../components/App';
 

@@ -21,4 +21,10 @@ export default createGlobalStyle`
   ul {
     list-style: none;
   }
+
+  h2 {
+    margin-bottom: 10px;
+    font-size: 28px;
+    font-weight: 400;
+  }
 `;
