@@ -4,7 +4,7 @@ import Input from '../Input';
 import Select from '../Select';
 import Button from '../Button';
 
-import { Form } from './styles';
+import { Form, Label } from './styles';
 
 function CampaignForm({
   label,
@@ -20,6 +20,7 @@ function CampaignForm({
     <>
       <h2>{label}</h2>
       <Form onSubmit={handleFormSubmit}>
+        <Label>Name</Label>
         <Input
           type="text"
           placeholder="Name"
@@ -27,12 +28,14 @@ function CampaignForm({
           onChange={(e) => handleCampaignChange(e, 'name')}
         />
 
+        <Label>Advertiser ID</Label>
         <Input
           type="text"
           value={campaign.advertiser_id}
           disabled
         />
 
+        <Label>Campaign type</Label>
         <Select
           name="campaign-type"
           id="campaign-type"
@@ -44,6 +47,7 @@ function CampaignForm({
           ))}
         </Select>
 
+        <Label>Countries</Label>
         <Select
           name="countries"
           id="countries"
@@ -56,6 +60,7 @@ function CampaignForm({
           ))}
         </Select>
 
+        <Label>BID</Label>
         <Input
           type="text"
           placeholder="BID"

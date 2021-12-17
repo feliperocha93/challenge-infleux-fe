@@ -11,3 +11,9 @@ export const Form = styled.form`
     }
   }
 `;
+
+export const Label = styled.span`
+  font-size: 12px;
+  margin-bottom: 4px;
+  color: '#ccc'
+`;
