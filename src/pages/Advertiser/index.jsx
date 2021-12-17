@@ -7,66 +7,29 @@ import CampaignList from '../../components/CampaignList';
 import { Context } from '../../components/App';
 import AdvertisersService from '../../services/api/AdvertisersService';
 
-// const myCampaigns = [
-//   {
-//     name: 'Minha Campanha 1',
-//     advertiser_id: '123456789',
-//     campaign_type: 'CPM',
-//     countries_id: ['123456789', '123456789'],
-//     bid: 100.00,
-//     publishers: [
-//       {
-//         publisher_id: '1',
-//         publisher_result: 70,
-//       },
-//       {
-//         publisher_id: '1',
-//         publisher_result: 70,
-//       },
-//     ],
-//   },
-//   {
-//     name: 'Minha Campanha 2',
-//     advertiser_id: '123456789',
-//     campaign_type: 'CPM',
-//     countries_id: ['123456789', '123456789'],
-//     bid: 100.00,
-//     publishers: [
-//       {
-//         publisher_id: '1',
-//         publisher_result: 478,
-//       },
-//       {
-//         publisher_id: '1',
-//         publisher_result: 478,
-//       },
-//     ],
-
-//   },
-// ];
-
 const campaignTypeValues = ['CPM', 'CPC', 'CPI'];
 
 function Advertiser() {
   const { state } = useContext(Context);
-
   const [myCampaigns, setMyCampaigns] = useState([]);
 
-  const [newCampaign, setNewCampaign] = useState({
+  const cleanCampaign = {
     name: '',
     advertiser_id: state.user.userId,
     campaign_type: '',
     countries_id: [],
     bid: '',
-  });
+  };
+
+  const [newCampaign, setNewCampaign] = useState(cleanCampaign);
   const [formIsValid, setFormIsValid] = useState(false);
 
+  async function fetchMyCampaigns() {
+    const response = await AdvertisersService.getMyCampaigns(state.user.userId);
+    setMyCampaigns(response);
+  }
+
   useEffect(() => {
-    async function fetchMyCampaigns() {
-      const response = await AdvertisersService.getMyCampaigns(state.user.userId);
-      console.log({ response });
-      setMyCampaigns(response);
-    }
     fetchMyCampaigns();
   }, []);
 
@@ -80,7 +43,7 @@ function Advertiser() {
     } else {
       setFormIsValid(false);
     }
-  }, [newCampaign, setFormIsValid]);
+  }, [newCampaign]);
 
   function handleNewCampaignChange(event, field) {
     setNewCampaign({
@@ -97,15 +60,21 @@ function Advertiser() {
     });
   }
 
-  function handleFormSubmit(event) {
+  async function handleFormSubmit(event) {
     event.preventDefault();
+    try {
+      await AdvertisersService.createCampgin(newCampaign);
+      setNewCampaign(cleanCampaign);
+      fetchMyCampaigns();
+      alert('Created');
+    } catch {
+      alert('Something is wrong. Try again, please.');
+    }
   }
 
   return (
     <>
       <PageHeader />
-
-      <CampaignList label="Minhas campanhas" campaigns={myCampaigns} />
 
       <CampaignForm
         label="New Campaign"
@@ -117,6 +86,8 @@ function Advertiser() {
         countries={state.countries}
         formIsValid={formIsValid}
       />
+
+      <CampaignList label="My Campaigns" campaigns={myCampaigns} />
     </>
   );
 }

@@ -39,7 +39,7 @@ function CampaignForm({
           id="campaign-type"
           onChange={(e) => handleCampaignChange(e, 'campaign_type')}
         >
-          <option label="Select a type" disabled selected />
+          <option value="" label="Select a type" disabled selected />
           {campaignTypeValues.map((type) => (
             <option value={type} label={type} key={type} />
           ))}
@@ -51,7 +51,7 @@ function CampaignForm({
           onChange={handleCountriesCampaignChange}
           multiple
         >
-          <option label="Select countries" disabled selected />
+          <option value="" label="Select countries" disabled selected />
           {countries.map((country) => (
             <option value={country._id} label={country.name} key={country._id} />
           ))}

@@ -8,11 +8,14 @@ import { Container } from './styles';
 import { Context } from '../App';
 
 function PageHeader() {
-  const { setState } = useContext(Context);
+  const { state, setState } = useContext(Context);
   const navigate = useNavigate();
 
   function logout() {
-    setState({});
+    setState({
+      ...state,
+      user: {},
+    });
     localStorage.removeItem('user-role');
     localStorage.removeItem('user-id');
     navigate('/login');
