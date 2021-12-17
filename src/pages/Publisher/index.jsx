@@ -29,19 +29,20 @@ function Publisher() {
 
   async function addCampaign(campaign_id) {
     try {
-      PublishersService.subscribeToCampaign(state.user.userId, campaign_id);
+      await PublishersService.subscribeToCampaign(state.user.userId, campaign_id);
       fetchMyCampaigns();
+      fetchBestForMe();
       alert('Subscribed');
     } catch {
       alert('Something is wrong. Try again, please.');
     }
   }
 
-  async function removeCampaign(id) {
+  async function removeCampaign(campaign_id) {
     try {
-      console.log({ id });
+      await PublishersService.unsubscribeFromCampaign(state.user.userId, campaign_id);
       fetchMyCampaigns();
-      alert('Deleted');
+      alert('Unsubscribed');
     } catch {
       alert('Something is wrong. Try again, please.');
     }

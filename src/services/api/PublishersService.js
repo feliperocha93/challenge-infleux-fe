@@ -44,8 +44,7 @@ class PublishersService {
 
   async unsubscribeFromCampaign(id, campaign_id) {
     const { data } = await axiosInstance.delete(
-      `${this.campaignsUrl}/${campaign_id}/publishers`,
-      { publisher_id: id },
+      `${this.campaignsUrl}/${campaign_id}/publishers/${id}`,
     );
 
     return data;
