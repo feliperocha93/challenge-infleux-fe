@@ -15,3 +15,9 @@ h3 {
   color: ${({ theme }) => theme.colors.primary.dark};
 }
 `;
+
+export const CardHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;

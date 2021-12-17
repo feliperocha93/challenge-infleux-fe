@@ -63,10 +63,20 @@ function Advertiser() {
   async function handleFormSubmit(event) {
     event.preventDefault();
     try {
-      await AdvertisersService.createCampgin(newCampaign);
+      await AdvertisersService.createCampaign(newCampaign);
       setNewCampaign(cleanCampaign);
       fetchMyCampaigns();
       alert('Created');
+    } catch {
+      alert('Something is wrong. Try again, please.');
+    }
+  }
+
+  async function removeCampaign(id) {
+    try {
+      await AdvertisersService.removeCampaign(id);
+      fetchMyCampaigns();
+      alert('Deleted');
     } catch {
       alert('Something is wrong. Try again, please.');
     }
@@ -87,7 +97,11 @@ function Advertiser() {
         formIsValid={formIsValid}
       />
 
-      <CampaignList label="My Campaigns" campaigns={myCampaigns} />
+      <CampaignList
+        label="My Campaigns"
+        campaigns={myCampaigns}
+        handleDeleteClick={removeCampaign}
+      />
     </>
   );
 }
