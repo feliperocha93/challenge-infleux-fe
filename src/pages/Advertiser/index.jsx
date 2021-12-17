@@ -46,12 +46,6 @@ const myCampaigns = [
 
 const campaignTypeValues = ['CPM', 'CPC', 'CPI'];
 
-const countries = [
-  { name: 'China', _id: '123' },
-  { name: 'Brazil', _id: '456' },
-  { name: 'Canada', _id: '789' },
-];
-
 function Advertiser() {
   const { state } = useContext(Context);
   const [newCampaign, setNewCampaign] = useState({
@@ -107,7 +101,7 @@ function Advertiser() {
         handleCampaignChange={handleNewCampaignChange}
         handleCountriesCampaignChange={handleCountriesNewCampaignChange}
         campaignTypeValues={campaignTypeValues}
-        countries={countries}
+        countries={state.countries}
         formIsValid={formIsValid}
       />
     </>

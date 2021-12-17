@@ -40,7 +40,9 @@ function CampaignForm({
           onChange={(e) => handleCampaignChange(e, 'campaign_type')}
         >
           <option label="Select a type" disabled selected />
-          {campaignTypeValues.map((type) => <option value={type} label={type} />)}
+          {campaignTypeValues.map((type) => (
+            <option value={type} label={type} key={type} />
+          ))}
         </Select>
 
         <Select
@@ -50,7 +52,9 @@ function CampaignForm({
           multiple
         >
           <option label="Select countries" disabled selected />
-          {countries.map((country) => <option value={country._id} label={country.name} />)}
+          {countries.map((country) => (
+            <option value={country._id} label={country.name} key={country._id} />
+          ))}
         </Select>
 
         <Input
@@ -70,7 +74,7 @@ function CampaignForm({
 
 CampaignForm.propTypes = {
   label: PropTypes.string.isRequired,
-  campaign: PropTypes.string.isRequired,
+  campaign: PropTypes.object.isRequired,
   handleFormSubmit: PropTypes.func.isRequired,
   handleCampaignChange: PropTypes.func.isRequired,
   handleCountriesCampaignChange: PropTypes.func.isRequired,

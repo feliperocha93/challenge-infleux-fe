@@ -8,12 +8,12 @@ import { Form, RadioGroupContainer } from './styles';
 
 import { Context } from '../../components/App';
 
-const userRole = localStorage.getItem('user-role') || 'advertiser';
-const userId = localStorage.getItem('user-id') || '';
-
 function Auth() {
   const { state, setState } = useContext(Context);
-  const [user, setUser] = useState({ userRole, userId });
+  const [user, setUser] = useState({
+    userRole: localStorage.getItem('user-role') || 'advertiser',
+    userId: localStorage.getItem('user-id') || '',
+  });
   const navigate = useNavigate();
 
   function handleUserRoleChange(event) {
