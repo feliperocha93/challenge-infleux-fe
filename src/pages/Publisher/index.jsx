@@ -19,7 +19,7 @@ function Publisher() {
 
   async function fetchBestForMe() {
     // TODO: Filter best for me
-    const response = await PublishersService.getMyCampaigns(state.user.userId);
+    const response = await PublishersService.getBestForMe(state.country_id);
     setBestCampaignsForMe(response);
   }
 

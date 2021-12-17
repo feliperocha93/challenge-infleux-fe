@@ -37,7 +37,7 @@ function Auth() {
     event.preventDefault();
 
     try {
-      const { name } = user.userRole === 'advertiser'
+      const { name, country_id } = user.userRole === 'advertiser'
         ? await AdvertisersService.login(user.userId)
         : await PublishersService.login(user.userId);
 
@@ -48,6 +48,7 @@ function Auth() {
         ...state,
         user,
         name,
+        country_id,
       });
 
       navigate('/');

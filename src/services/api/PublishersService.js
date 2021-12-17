@@ -26,8 +26,8 @@ class PublishersService {
     return campaigns;
   }
 
-  async getBestForMe(id) {
-    const { data } = await axiosInstance.get(`${this.publishersUrl}/${id}`);
+  async getBestForMe(country_id) {
+    const { data } = await axiosInstance.get(`${this.campaignsUrl}/fetch?country_id=${country_id}`);
 
     return data;
   }
