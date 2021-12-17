@@ -7,7 +7,9 @@ import Button from '../../components/Button';
 import { Form, RadioGroupContainer } from './styles';
 
 import { Context } from '../../components/App';
+
 import AdvertisersService from '../../services/api/AdvertisersService';
+import PublishersService from '../../services/api/PublishersService';
 
 function Auth() {
   const { state, setState } = useContext(Context);
@@ -35,14 +37,19 @@ function Auth() {
     event.preventDefault();
 
     try {
-      const { name } = await AdvertisersService.login(user.userId);
+      const { name } = user.userRole === 'advertiser'
+        ? await AdvertisersService.login(user.userId)
+        : await PublishersService.login(user.userId);
+
       localStorage.setItem('user-role', user.userRole);
       localStorage.setItem('user-id', user.userId);
+
       setState({
         ...state,
         user,
         name,
       });
+
       navigate('/');
     } catch {
       alert('Something is wrong. Try again, please.');

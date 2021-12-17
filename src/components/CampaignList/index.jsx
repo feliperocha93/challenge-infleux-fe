@@ -14,7 +14,7 @@ function CampaignList({ label, campaigns, handleDeleteClick }) {
           <CampaignCard
             campaign={campaign}
             handleDeleteClick={handleDeleteClick}
-            key={campaign.name}
+            key={campaign._id}
           />
         ))}
       </ListContent>
