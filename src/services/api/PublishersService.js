@@ -18,9 +18,10 @@ class PublishersService {
     const { data } = await axiosInstance.get(`${this.publishersUrl}/${id}`);
 
     const campaigns = [];
+
     for (const campaign_id of data.campaigns_id) {
       const campaign = await axiosInstance.get(`${this.campaignsUrl}/${campaign_id}`);
-      campaigns.push(campaign);
+      campaigns.push(campaign.data);
     }
 
     return campaigns;
@@ -32,17 +33,23 @@ class PublishersService {
     return data;
   }
 
-  // async createCampaign(campaign) {
-  //   const { data } = await axiosInstance.post(`${this.campaignsUrl}`, campaign);
+  async subscribeToCampaign(id, campaign_id) {
+    const { data } = await axiosInstance.post(
+      `${this.campaignsUrl}/${campaign_id}/publishers`,
+      { publisher_id: id },
+    );
 
-  //   return data;
-  // }
+    return data;
+  }
 
-  // async removeCampaign(id) {
-  //   const { data } = await axiosInstance.delete(`${this.campaignsUrl}/${id}`);
+  async unsubscribeFromCampaign(id, campaign_id) {
+    const { data } = await axiosInstance.delete(
+      `${this.campaignsUrl}/${campaign_id}/publishers`,
+      { publisher_id: id },
+    );
 
-  //   return data;
-  // }
+    return data;
+  }
 }
 
 export default new PublishersService();

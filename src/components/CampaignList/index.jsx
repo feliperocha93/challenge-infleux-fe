@@ -4,7 +4,9 @@ import { ListContent } from './styles';
 
 import CampaignCard from '../CampaignCard';
 
-function CampaignList({ label, campaigns, handleDeleteClick }) {
+function CampaignList({
+  label, campaigns, handleDeleteClick, handleAddClick,
+}) {
   return (
     <>
       <h2>{label}</h2>
@@ -14,6 +16,7 @@ function CampaignList({ label, campaigns, handleDeleteClick }) {
           <CampaignCard
             campaign={campaign}
             handleDeleteClick={handleDeleteClick}
+            handleAddClick={handleAddClick}
             key={campaign._id}
           />
         ))}
@@ -25,7 +28,13 @@ function CampaignList({ label, campaigns, handleDeleteClick }) {
 CampaignList.propTypes = {
   label: PropTypes.string.isRequired,
   campaigns: PropTypes.array.isRequired,
-  handleDeleteClick: PropTypes.func.isRequired,
+  handleDeleteClick: PropTypes.func,
+  handleAddClick: PropTypes.func,
+};
+
+CampaignList.defaultProps = {
+  handleDeleteClick: null,
+  handleAddClick: null,
 };
 
 export default CampaignList;

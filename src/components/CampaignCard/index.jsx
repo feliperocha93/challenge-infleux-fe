@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 
-import { AiOutlineDelete } from 'react-icons/ai';
+import { AiOutlineDelete, AiOutlineUserAdd } from 'react-icons/ai';
 
 import { Card, CardHeader } from './styles';
 
-function CampaignCard({ campaign, handleDeleteClick }) {
+function CampaignCard({ campaign, handleDeleteClick, handleAddClick }) {
   const {
     _id, name, advertiser_id, campaign_type, countries_id, bid, publishers,
   } = campaign;
@@ -13,12 +13,26 @@ function CampaignCard({ campaign, handleDeleteClick }) {
     <Card>
       <CardHeader>
         <h3>{name}</h3>
+
+        {handleDeleteClick
+        && (
         <AiOutlineDelete
           onClick={() => handleDeleteClick(_id)}
           size={20}
           fill="#F63131"
           style={{ cursor: 'pointer' }}
         />
+        )}
+
+        {handleAddClick
+        && (
+        <AiOutlineUserAdd
+          onClick={() => handleAddClick(_id)}
+          size={20}
+          fill="#C60A47"
+          style={{ cursor: 'pointer' }}
+        />
+        )}
       </CardHeader>
 
       <ul>
@@ -72,7 +86,13 @@ CampaignCard.propTypes = {
     bid: PropTypes.number,
     publishers: PropTypes.array,
   }).isRequired,
-  handleDeleteClick: PropTypes.func.isRequired,
+  handleDeleteClick: PropTypes.func,
+  handleAddClick: PropTypes.func,
+};
+
+CampaignCard.defaultProps = {
+  handleDeleteClick: null,
+  handleAddClick: null,
 };
 
 export default CampaignCard;

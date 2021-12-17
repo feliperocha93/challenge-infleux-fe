@@ -18,7 +18,6 @@ function Publisher() {
   }
 
   async function fetchBestForMe() {
-    // TODO: Filter best for me
     const response = await PublishersService.getBestForMe(state.country_id);
     setBestCampaignsForMe(response);
   }
@@ -27,6 +26,16 @@ function Publisher() {
     fetchMyCampaigns();
     fetchBestForMe();
   }, []);
+
+  async function addCampaign(campaign_id) {
+    try {
+      PublishersService.subscribeToCampaign(state.user.userId, campaign_id);
+      fetchMyCampaigns();
+      alert('Subscribed');
+    } catch {
+      alert('Something is wrong. Try again, please.');
+    }
+  }
 
   async function removeCampaign(id) {
     try {
@@ -51,7 +60,7 @@ function Publisher() {
       <CampaignList
         label="Best for me"
         campaigns={bestCampaignsForMe}
-        handleDeleteClick={removeCampaign}
+        handleAddClick={addCampaign}
       />
     </>
   );
